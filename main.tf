@@ -1,5 +1,6 @@
 // Main //
 
+// Deploy the Infrastructure
 module "Infrastructure" {
   source = "./modules/infra"
   aws_access_key = var.aws_access_key
@@ -14,12 +15,21 @@ module "Infrastructure" {
   key_name       = var.key_name
 }
 
-// Deploy Yelb App
+// Deploy the Yelb App
 resource "null_resource" "kubectl_create_yelb" {
-  depends_on = module.Infrastructure
+  depends_on = [module.Infrastructure]
   provisioner "local-exec" {
-      working_dir = "${path.module}/Yelb_App"
-      command = "kubectl create -f yelb_app.yaml"
+    working_dir = "${path.module}/Yelb_App"
+    command     = "kubectl create -f yelb_app.yaml"
+  }
+}
+
+// Deploy Secure Cloud Analytics
+module "Secure_Cloud_Analytics" {
+  depends_on = [module.Infrastructure]
+  source = "./modules/secure_cloud_analytics"
+  sca_service_key = var.sca_service_key
+}
 
 // Providers //
 
