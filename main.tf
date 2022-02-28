@@ -14,13 +14,6 @@ module "Infrastructure" {
   key_name       = var.key_name
 }
 
-// Deploy Yelb App
-resource "null_resource" "kubectl_create_yelb" {
-  depends_on = module.Infrastructure
-  provisioner "local-exec" {
-      working_dir = "${path.module}/Yelb_App"
-      command = "kubectl create -f yelb_app.yaml"
-
 // Providers //
 
 terraform {
