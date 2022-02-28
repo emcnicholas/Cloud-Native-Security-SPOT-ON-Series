@@ -40,7 +40,7 @@ pipeline{
                 -var="key_name=$AWS_SSH_KEY_NAME"'
             }
         }
-        // This stage will destroy the environment when "Destroy Environment" is added to the commit message 
+        // Warning: This stage will destroy the environment when "Destroy Environment" is added to the commit message
         stage('Destroy Environment'){
             when{
                 allOf{
