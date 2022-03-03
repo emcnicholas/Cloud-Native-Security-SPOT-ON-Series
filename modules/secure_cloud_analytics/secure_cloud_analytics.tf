@@ -1,6 +1,6 @@
 // Deploy Cisco Secure Analytics Daemonset //
 
-// Secret //
+// Secret
 resource "kubernetes_secret" "obsrvbl" {
   depends_on = []
   metadata {
@@ -12,7 +12,7 @@ resource "kubernetes_secret" "obsrvbl" {
   }
 }
 
-// Service Account //
+// Service Account
 resource "kubernetes_service_account" "obsrvbl" {
   depends_on = [kubernetes_secret.obsrvbl]
   metadata {
@@ -20,7 +20,7 @@ resource "kubernetes_service_account" "obsrvbl" {
   }
 }
 
-// Cluster Role Binding //
+// Cluster Role Binding
 resource "kubernetes_cluster_role_binding" "obsrvbl" {
   depends_on = [kubernetes_service_account.obsrvbl]
   metadata {
@@ -38,7 +38,7 @@ resource "kubernetes_cluster_role_binding" "obsrvbl" {
   }
 }
 
-// DaemonSet //
+// DaemonSet
 resource "kubernetes_daemonset" "obsrvbl-ona" {
   depends_on = [kubernetes_cluster_role_binding.obsrvbl]
   metadata {
