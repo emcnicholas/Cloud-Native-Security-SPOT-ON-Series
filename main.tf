@@ -22,6 +22,18 @@ module "Secure_Cloud_Analytics" {
   sca_service_key = var.sca_service_key
 }
 
+// Deploy Secure Workload
+module "Secure_Workload" {
+  depends_on = [module.Infrastructure]
+  source = "./modules/secure_workload"
+  secure_workload_api_key    = var.secure_workload_api_key
+  secure_workload_api_sec    = var.secure_workload_api_sec
+  secure_workload_api_url    = var.secure_workload_api_url
+  secure_workload_root_scope = var.secure_workload_root_scope
+  eks_cluster_name           = module.Infrastructure.eks_cluster_name
+  env_id                     = var.env_id
+}
+
 // Providers //
 
 terraform {
@@ -37,6 +49,10 @@ terraform {
     kubectl = {
       source = "gavinbunney/kubectl"
       version = "1.11.3"
+    }
+    tetration = {
+      source = "CiscoDevNet/tetration"
+      version = "0.1.0"
     }
   }
 }
@@ -58,4 +74,11 @@ provider "kubectl" {
   cluster_ca_certificate = base64decode(module.Infrastructure.eks_cluster_ca)
   token                  = module.Infrastructure.eks_cluster_auth_token
   load_config_file       = false
+}
+
+provider "tetration" {
+  api_key = var.secure_workload_api_key
+  api_secret = var.secure_workload_api_sec
+  api_url = var.secure_workload_api_url
+  disable_tls_verification = true
 }
