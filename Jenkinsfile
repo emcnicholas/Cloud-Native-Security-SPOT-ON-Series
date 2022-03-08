@@ -17,7 +17,7 @@ pipeline{
         SW_API_KEY             = credentials('sw-api-key')
         SW_API_SEC             = credentials('sw-api-sec')
         SW_URL                 = credentials('sw-url')
-        SW_ROOT_SCOPE          = credentials('sw-root-scope')
+        SW_ROOT_SCOPE          = '622686c6755f0272be8c7a26'
     }
     stages{
         // This stage will run Terraform Apply when "Deploy Env" is added to the commit message //
