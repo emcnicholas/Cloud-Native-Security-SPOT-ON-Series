@@ -1,4 +1,4 @@
-#// Secure Workload Configuration Terraform Resources //
+// Secure Workload Configuration Terraform Resources //
 #
 #// Cluster Scope
 #resource "tetration_scope" "scope" {

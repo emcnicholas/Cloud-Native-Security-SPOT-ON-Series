@@ -71,7 +71,11 @@ pipeline{
                 -var="aws_az2=$PROD_AWS_AZ2" \
                 -var="ftd_pass=$FTD_FTD_USERNAME" \
                 -var="ftd_pass=$FTD_PASSWORD" \
-                -var="key_name=$AWS_SSH_KEY_NAME"'
+                -var="key_name=$AWS_SSH_KEY_NAME" \
+                -var="secure_workload_api_key=$SW_API_KEY" \
+                -var="secure_workload_api_sec=$SW_API_SEC" \
+                -var="secure_workload_api_url=$SW_URL" \
+                -var="secure_workload_root_scope=$SW_ROOT_SCOPE"
             }
         }
     }
