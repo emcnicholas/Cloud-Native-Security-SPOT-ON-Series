@@ -16,11 +16,11 @@ module "Infrastructure" {
 }
 
 // Deploy Secure Cloud Analytics
-#module "Secure_Cloud_Analytics" {
-#  depends_on = [module.Infrastructure]
-#  source = "./modules/secure_cloud_analytics"
-#  sca_service_key = var.sca_service_key
-#}
+module "Secure_Cloud_Analytics" {
+  depends_on = [module.Infrastructure]
+  source = "./modules/secure_cloud_analytics"
+  sca_service_key = var.sca_service_key
+}
 #
 #// Deploy Secure Workload
 #module "Secure_Workload" {
