@@ -16,23 +16,23 @@ module "Infrastructure" {
 }
 
 // Deploy Secure Cloud Analytics
-module "Secure_Cloud_Analytics" {
-  depends_on = [module.Infrastructure]
-  source = "./modules/secure_cloud_analytics"
-  sca_service_key = var.sca_service_key
-}
-
-// Deploy Secure Workload
-module "Secure_Workload" {
-  depends_on = [module.Infrastructure]
-  source = "./modules/secure_workload"
-  secure_workload_api_key    = var.secure_workload_api_key
-  secure_workload_api_sec    = var.secure_workload_api_sec
-  secure_workload_api_url    = var.secure_workload_api_url
-  secure_workload_root_scope = var.secure_workload_root_scope
-  eks_cluster_name           = module.Infrastructure.eks_cluster_name
-  env_id                     = var.env_id
-}
+#module "Secure_Cloud_Analytics" {
+#  depends_on = [module.Infrastructure]
+#  source = "./modules/secure_cloud_analytics"
+#  sca_service_key = var.sca_service_key
+#}
+#
+#// Deploy Secure Workload
+#module "Secure_Workload" {
+#  depends_on = [module.Infrastructure]
+#  source = "./modules/secure_workload"
+#  secure_workload_api_key    = var.secure_workload_api_key
+#  secure_workload_api_sec    = var.secure_workload_api_sec
+#  secure_workload_api_url    = var.secure_workload_api_url
+#  secure_workload_root_scope = var.secure_workload_root_scope
+#  eks_cluster_name           = module.Infrastructure.eks_cluster_name
+#  env_id                     = var.env_id
+#}
 
 // Providers //
 
