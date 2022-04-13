@@ -10,7 +10,6 @@ resource "tetration_scope" "eks_scope" {
   parent_app_scope_id = var.secure_workload_root_scope
 }
 
-
 // Yelb App Scope
 resource "tetration_scope" "yelb_app_scope" {
   depends_on = [tetration_scope.eks_scope]
