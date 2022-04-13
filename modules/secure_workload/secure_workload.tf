@@ -21,6 +21,20 @@ resource "tetration_scope" "yelb_app_scope" {
 }
 
 // Yelb App Filters
+resource "tetration_filter" "virtual_network_name" {
+  depends_on = [tetration_scope.yelb_app_scope]
+  name         = "${var.eks_cluster_name} Virtual Network Name"
+  query        = <<EOF
+                    {
+                      "type": "eq",
+                      "field": "user_orchestrator_system/virtual_network_name",
+                      "value": "${var.eks_cluster_name}"
+                    }
+          EOF
+  app_scope_id = tetration_scope.yelb_app_scope.id
+  primary      = true
+  public       = false
+}
 resource "tetration_filter" "yelb-db-srv" {
   depends_on = [tetration_scope.yelb_app_scope]
   name         = "${var.eks_cluster_name} Yelb DB Service"
@@ -175,15 +189,6 @@ resource "tetration_application" "yelb_app" {
       port_range = [
         4567,
         4567]
-      protocol = 6
-    }
-  }
-  default_policy {
-    consumer_filter_id = tetration_filter.yelb-app-pod.id
-    provider_filter_id = tetration_filter.yelb-db-srv.id
-    action = "ALLOW"
-    layer_4_network_policy {
-      port_range = [5432,5432]
       protocol = 6
     }
   }
