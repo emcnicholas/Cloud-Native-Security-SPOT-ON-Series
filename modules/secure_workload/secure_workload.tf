@@ -161,7 +161,7 @@ resource "tetration_application" "yelb_app" {
   default_policy {
     consumer_filter_id = tetration_filter.any-ipv4.id
     provider_filter_id = tetration_filter.yelb-ui-srv.id
-    action = "ALLOW"
+    action = "DENY"
     layer_4_network_policy {
       port_range = [80, 80]
       protocol = 6
