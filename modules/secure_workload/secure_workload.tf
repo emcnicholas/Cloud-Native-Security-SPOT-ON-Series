@@ -163,7 +163,6 @@ resource "tetration_filter" "any-ipv4" {
 }
 
 // Application
-
 resource "tetration_application" "yelb_app" {
   depends_on = [tetration_scope.yelb_app_scope]
   app_scope_id = tetration_scope.yelb_app_scope.id
