@@ -11,6 +11,7 @@ resource "tetration_scope" "root_scope" {
 }
 
 // Yelb App Scope
+
 resource "tetration_scope" "yelb_app_scope" {
   depends_on = [tetration_scope.root_scope]
   short_name          = "Yelb_${var.env_id}"
