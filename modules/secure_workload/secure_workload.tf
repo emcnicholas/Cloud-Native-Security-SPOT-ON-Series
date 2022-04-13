@@ -1,9 +1,9 @@
 // Secure Workload Configuration Terraform Resources //
 
 // Cluster Root Scope
-resource "tetration_scope" "eks_scope" {
+resource "tetration_scope" "root_scope" {
   depends_on = []
-  short_name          = "${var.eks_cluster_name} EKS Cluster"
+  short_name          = var.eks_cluster_name
   short_query_type    = "eq"
   short_query_field   = "user_orchestrator_system/cluster_name"
   short_query_value   = var.eks_cluster_name
@@ -12,12 +12,12 @@ resource "tetration_scope" "eks_scope" {
 
 // Yelb App Scope
 resource "tetration_scope" "yelb_app_scope" {
-  depends_on = [tetration_scope.eks_scope]
+  depends_on = [tetration_scope.root_scope]
   short_name          = "Yelb_${var.env_id}"
   short_query_type    = "eq"
   short_query_field   = "user_orchestrator_system/namespace"
   short_query_value   = "yelb"
-  parent_app_scope_id = tetration_scope.eks_scope.id
+  parent_app_scope_id = tetration_scope.root_scope.id
 }
 
 // Yelb App Filters
