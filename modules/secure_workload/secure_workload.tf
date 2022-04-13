@@ -1,6 +1,7 @@
 // Secure Workload Configuration Terraform Resources //
 
 // Cluster Root Scope
+
 resource "tetration_scope" "root_scope" {
   depends_on = []
   short_name          = var.eks_cluster_name
