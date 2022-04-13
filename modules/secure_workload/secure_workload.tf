@@ -1,10 +1,9 @@
 // Secure Workload Configuration Terraform Resources //
 
 // Cluster Root Scope
-
 resource "tetration_scope" "root_scope" {
   depends_on = []
-  short_name          = var.eks_cluster_name
+  short_name          = "${var.eks_cluster_name} EKS Cluster"
   short_query_type    = "eq"
   short_query_field   = "user_orchestrator_system/cluster_name"
   short_query_value   = var.eks_cluster_name
@@ -13,12 +12,12 @@ resource "tetration_scope" "root_scope" {
 
 // Yelb App Scope
 resource "tetration_scope" "yelb_app_scope" {
-  depends_on = [tetration_scope.root_scope]
+  depends_on = [tetration_scope.eks_scope]
   short_name          = "Yelb_${var.env_id}"
   short_query_type    = "eq"
   short_query_field   = "user_orchestrator_system/namespace"
   short_query_value   = "yelb"
-  parent_app_scope_id = tetration_scope.root_scope.id
+  parent_app_scope_id = tetration_scope.eks_scope.id
 }
 
 // Yelb App Filters
@@ -164,7 +163,6 @@ resource "tetration_filter" "any-ipv4" {
 }
 
 // Application
-
 resource "tetration_application" "yelb_app" {
   depends_on = [tetration_scope.yelb_app_scope]
   app_scope_id = tetration_scope.yelb_app_scope.id
@@ -176,7 +174,7 @@ resource "tetration_application" "yelb_app" {
   default_policy {
     consumer_filter_id = tetration_filter.any-ipv4.id
     provider_filter_id = tetration_filter.yelb-ui-srv.id
-    action = "ALLOW"
+    action = "DENY"
     layer_4_network_policy {
       port_range = [80, 80]
       protocol = 6
@@ -190,15 +188,6 @@ resource "tetration_application" "yelb_app" {
       port_range = [
         4567,
         4567]
-      protocol = 6
-    }
-  }
-  default_policy {
-    consumer_filter_id = tetration_filter.yelb-app-pod.id
-    provider_filter_id = tetration_filter.yelb-db-srv.id
-    action = "ALLOW"
-    layer_4_network_policy {
-      port_range = [5432,5432]
       protocol = 6
     }
   }
