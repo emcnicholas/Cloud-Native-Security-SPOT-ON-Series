@@ -10,8 +10,23 @@ resource "tetration_scope" "root_scope" {
   parent_app_scope_id = var.secure_workload_root_scope
 }
 
-// Yelb App Scope
+// Cluster Filters
+resource "tetration_filter" "kube_dns" {
+  depends_on = [tetration_scope.root_scope]
+  name         = "${var.eks_cluster_name} Kube-DNS"
+  query        = <<EOF
+                    {
+                      "type": "eq",
+                      "field": "user_orchestrator_system/service_name",
+                      "value": "kube-dns"
+                    }
+          EOF
+  app_scope_id = tetration_scope.root_scope.id
+  primary      = true
+  public       = false
+}
 
+// Yelb App Scope
 resource "tetration_scope" "yelb_app_scope" {
   depends_on = [tetration_scope.root_scope]
   short_name          = "Yelb_${var.env_id}"
