@@ -188,6 +188,15 @@ resource "tetration_application" "yelb_app" {
   alternate_query_mode = true
   strict_validation = true
   primary = false
+    absolute_policy {
+    consumer_filter_id = tetration_scope.yelb_app_scope.id
+    provider_filter_id = tetration_filter.kube_dns.id
+    action = "ALLOW"
+    layer_4_network_policy {
+      port_range = [53, 53]
+      protocol = 17
+    }
+  }
   default_policy {
     consumer_filter_id = tetration_filter.any-ipv4.id
     provider_filter_id = tetration_filter.yelb-ui-srv.id
