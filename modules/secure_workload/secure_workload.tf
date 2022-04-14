@@ -26,6 +26,7 @@ resource "tetration_filter" "kube_dns" {
   public       = false
 }
 
+
 // Yelb App Scope
 resource "tetration_scope" "yelb_app_scope" {
   depends_on = [tetration_scope.root_scope]
