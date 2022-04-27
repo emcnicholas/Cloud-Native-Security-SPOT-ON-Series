@@ -9,7 +9,6 @@ resource "securecn_k8s_cluster" "cluster" {
   connections_control = true
   inspect_incoming_cluster_connections = true
   multi_cluster_communication_support = false
-  inspect_incoming_cluster_connections = false
   fail_close = false
   persistent_storage = false
 }
