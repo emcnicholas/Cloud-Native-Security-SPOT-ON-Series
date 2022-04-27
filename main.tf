@@ -47,7 +47,7 @@ module "Secure_CN" {
   depends_on = [null_resource.update_kubeconfig]
   source = "./modules/secure_cn"
   environment_name = module.Infrastructure.eks_cluster_name
-  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_name
+  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
 }
 
 // Providers //
