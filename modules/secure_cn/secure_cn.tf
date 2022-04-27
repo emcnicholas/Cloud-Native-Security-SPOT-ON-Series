@@ -7,6 +7,7 @@ resource "securecn_k8s_cluster" "cluster" {
   ci_image_validation = false
   cd_pod_template = false
   connections_control = true
+  inspect_incoming_cluster_connections = true
   multi_cluster_communication_support = false
   inspect_incoming_cluster_connections = false
   fail_close = false
@@ -42,14 +43,56 @@ resource "securecn_environment" "yelb" {
 }
 
 // SecureCN Connection Rules
-resource "securecn_connection_rule" "External_to_Yelb_UI" {
 
+// Yelb Connection Rules
+resource "securecn_connection_rule" "External_to_Yelb_UI" {
   rule_name = "External to Yelb Web UI "
   source_by_external = true
-
   destination_by_pod_label {
     labels = {
       app = "yelb-ui"
+    }
+  }
+}
+
+resource "securecn_connection_rule" "Yelb_UI_to_App" {
+  rule_name = "Yelb UI to App"
+  source_by_pod_label {
+    labels = {
+      app = "yelb-ui"
+    }
+  }
+  destination_by_pod_label {
+    labels = {
+      app = "yelb-appserver"
+    }
+  }
+}
+
+resource "securecn_connection_rule" "Yelb_App_to_DB" {
+  rule_name = "Yelb App to DB"
+  source_by_pod_label {
+    labels = {
+      app = "yelb-appserver"
+    }
+  }
+  destination_by_pod_label {
+    labels = {
+      app = "yelb-db"
+    }
+  }
+}
+
+resource "securecn_connection_rule" "Yelb_App_to_Redis" {
+  rule_name = "Yelb App to Redis"
+  source_by_pod_label {
+    labels = {
+      app = "yelb-appserver"
+    }
+  }
+  destination_by_pod_label {
+    labels = {
+      app = "redis-server"
     }
   }
 }
