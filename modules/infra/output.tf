@@ -27,7 +27,12 @@ output "eks_cluster_ca" {
   value = data.aws_eks_cluster.eks_cluster.certificate_authority[0].data
 }
 
-//EKS Cluster Auth Token
+// EKS Cluster Auth Token
 output "eks_cluster_auth_token" {
   value = data.aws_eks_cluster_auth.eks_cluster_auth.token
+}
+
+// EKS Cluster ARN (Kubeconfig Context name)
+output "eks_cluster_arn" {
+  value = data.aws_eks_cluster.eks_cluster.arn
 }
