@@ -33,13 +33,22 @@ module "Secure_Workload" {
   eks_cluster_name           = module.Infrastructure.eks_cluster_name
   env_id                     = var.env_id
 }
+// Update AWS EKS Kubeconfig
+resource "null_resource" "update_kubeconfig" {
+  depends_on = [module.Infrastructure]
+  provisioner "local-exec" {
+      working_dir = path.module
+      command = "aws eks --region ${var.region} update-kubeconfig --name ${module.Infrastructure.eks_cluster_name}"
+  }
+}
 
 // Deploy Secure Application Cloud (CN)
-#module "Secure_CN" {
-#  source = "./modules/secure_cn"
-#  environment_name = module.Infrastructure.eks_cluster_name
-#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_name
-#}
+module "Secure_CN" {
+  depends_on = [null_resource.update_kubeconfig]
+  source = "./modules/secure_cn"
+  environment_name = module.Infrastructure.eks_cluster_name
+  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_name
+}
 
 // Providers //
 
