@@ -34,6 +34,13 @@ module "Secure_Workload" {
   env_id                     = var.env_id
 }
 
+// Deploy Secure Application Cloud (CN)
+#module "Secure_CN" {
+#  source = "./modules/secure_cn"
+#  environment_name = module.Infrastructure.eks_cluster_name
+#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_name
+#}
+
 // Providers //
 
 terraform {
@@ -53,6 +60,10 @@ terraform {
     tetration = {
       source = "CiscoDevNet/tetration"
       version = "0.1.0"
+    }
+    securecn = {
+      source = "Portshift/securecn"
+      version = ">= 1.1.9"
     }
   }
 }
@@ -81,4 +92,10 @@ provider "tetration" {
   api_secret = var.secure_workload_api_sec
   api_url = var.secure_workload_api_url
   disable_tls_verification = true
+}
+
+provider "securecn" {
+  access_key = var.secure_cn_access_key
+  secret_key = var.secure_cn_secret_key
+  //server_url = var.secure_cn_server_url
 }
