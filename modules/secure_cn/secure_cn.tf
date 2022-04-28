@@ -46,6 +46,7 @@ resource "securecn_environment" "yelb" {
 // Yelb Connection Rules
 resource "securecn_connection_rule" "External_to_Yelb_UI" {
   rule_name = "External to Yelb Web UI "
+  action = "DETECT"
   source_by_external = true
   destination_by_pod_name {
     names = ["yelb-ui"]
@@ -54,6 +55,7 @@ resource "securecn_connection_rule" "External_to_Yelb_UI" {
 
 resource "securecn_connection_rule" "Yelb_UI_to_App" {
   rule_name = "Yelb UI to App"
+  action = "DETECT"
   source_by_pod_name {
     names = ["yelb-ui"]
   }
@@ -64,6 +66,7 @@ resource "securecn_connection_rule" "Yelb_UI_to_App" {
 
 resource "securecn_connection_rule" "Yelb_App_to_DB" {
   rule_name = "Yelb App to DB"
+  action = "DETECT"
   source_by_pod_name {
     names = ["yelb-appserver"]
   }
@@ -74,6 +77,7 @@ resource "securecn_connection_rule" "Yelb_App_to_DB" {
 
 resource "securecn_connection_rule" "Yelb_App_to_Redis" {
   rule_name = "Yelb App to Redis"
+  action = "DETECT"
   source_by_pod_name {
     names = ["yelb-appserver"]
   }
