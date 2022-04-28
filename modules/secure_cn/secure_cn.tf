@@ -14,19 +14,19 @@ resource "securecn_k8s_cluster" "cluster" {
 }
 
 // SecureCN Environments
-resource "securecn_environment" "jenkins" {
-
-  name = "${var.environment_name}_Jenkins"
-  description = "Jenkins Environment"
-
-  kubernetes_environment {
-    cluster_name = securecn_k8s_cluster.cluster.name
-
-    namespaces_by_labels = {
-      app = "jenkins"
-    }
-  }
-}
+#resource "securecn_environment" "jenkins" {
+#
+#  name = "${var.environment_name}_Jenkins"
+#  description = "Jenkins Environment"
+#
+#  kubernetes_environment {
+#    cluster_name = securecn_k8s_cluster.cluster.name
+#
+#    namespaces_by_labels = {
+#      app = "jenkins"
+#    }
+#  }
+#}
 resource "securecn_environment" "yelb" {
 
   name = "${var.environment_name}_Yelb_App"
@@ -47,51 +47,37 @@ resource "securecn_environment" "yelb" {
 resource "securecn_connection_rule" "External_to_Yelb_UI" {
   rule_name = "External to Yelb Web UI "
   source_by_external = true
-  destination_by_pod_label {
-    labels = {
-      app = "yelb-ui"
-    }
+  destination_by_pod_name {
+    names = ["yelb-ui"]
   }
 }
 
 resource "securecn_connection_rule" "Yelb_UI_to_App" {
   rule_name = "Yelb UI to App"
-  source_by_pod_label {
-    labels = {
-      app = "yelb-ui"
-    }
+  source_by_pod_name {
+    names = ["yelb-ui"]
   }
-  destination_by_pod_label {
-    labels = {
-      app = "yelb-appserver"
-    }
+  destination_by_pod_name {
+    names = ["yelb-appserver"]
   }
 }
 
 resource "securecn_connection_rule" "Yelb_App_to_DB" {
   rule_name = "Yelb App to DB"
-  source_by_pod_label {
-    labels = {
-      app = "yelb-appserver"
-    }
+  source_by_pod_name {
+    names = ["yelb-appserver"]
   }
-  destination_by_pod_label {
-    labels = {
-      app = "yelb-db"
-    }
+  destination_by_pod_name {
+    names = ["yelb-db"]
   }
 }
 
 resource "securecn_connection_rule" "Yelb_App_to_Redis" {
   rule_name = "Yelb App to Redis"
-  source_by_pod_label {
-    labels = {
-      app = "yelb-appserver"
-    }
+  source_by_pod_name {
+    names = ["yelb-appserver"]
   }
-  destination_by_pod_label {
-    labels = {
-      app = "redis-server"
-    }
+  destination_by_pod_name {
+    names = ["redis-server"]
   }
 }
