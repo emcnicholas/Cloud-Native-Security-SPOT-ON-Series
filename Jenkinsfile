@@ -35,10 +35,6 @@ pipeline{
                 echo "Building Environment"
                 sh 'terraform get -update'
                 sh 'terraform init'
-                sh 'terraform state rm "module.Secure_CN.securecn_connection_rule.Yelb_UI_to_App"'
-                sh 'terraform state rm "module.Secure_CN.securecn_connection_rule.Yelb_App_to_DB"'
-                sh 'terraform state rm "module.Secure_CN.securecn_connection_rule.External_to_Yelb_UI"'
-                sh 'terraform state rm "module.Secure_CN.securecn_connection_rule.Yelb_App_to_Redis"'
                 sh 'terraform apply -auto-approve \
                 -var="aws_access_key=$AWS_ACCESS_KEY_ID" \
                 -var="aws_secret_key=$AWS_SECRET_ACCESS_KEY" \
