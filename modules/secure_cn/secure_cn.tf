@@ -12,7 +12,7 @@ resource "securecn_k8s_cluster" "cluster" {
   fail_close = false
   persistent_storage = false
   trace_analyzer = true
-  api_intelligence_dast = false
+  api_intelligence_dast = true
 }
 
 // SecureCN Environments
