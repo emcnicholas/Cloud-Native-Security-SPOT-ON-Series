@@ -6,7 +6,7 @@ resource "securecn_k8s_cluster" "cluster" {
   ci_image_validation = false
   cd_pod_template = false
   connections_control = true
-  inspect_incoming_cluster_connections = true
+  inspect_incoming_cluster_connections = false
   multi_cluster_communication_support = false
   fail_close = false
   persistent_storage = false
