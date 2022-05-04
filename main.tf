@@ -42,6 +42,7 @@ resource "null_resource" "update_kubeconfig" {
   }
 }
 
+
 // Deploy Secure Application Cloud (CN)
 module "Secure_CN" {
   depends_on = [null_resource.update_kubeconfig]
