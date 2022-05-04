@@ -81,7 +81,9 @@ pipeline{
                 -var="secure_workload_api_key=$SW_API_KEY" \
                 -var="secure_workload_api_sec=$SW_API_SEC" \
                 -var="secure_workload_api_url=$SW_URL" \
-                -var="secure_workload_root_scope=$SW_ROOT_SCOPE"'
+                -var="secure_workload_root_scope=$SW_ROOT_SCOPE" \
+                -var="secure_cn_access_key=$SECURE_CN_KEY" \
+                -var="secure_cn_secret_key=$SECURE_CN_SEC"'
             }
         }
     }
