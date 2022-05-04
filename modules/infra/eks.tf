@@ -199,7 +199,7 @@ resource "aws_launch_configuration" "eks-node-launch-config" {
   associate_public_ip_address = false
   iam_instance_profile        = aws_iam_instance_profile.eks-iam-instance-profile.name
   image_id                    = data.aws_ami.eks-worker.id
-  instance_type               = "m4.large"
+  instance_type               = "m5.2xlarge"
   name_prefix                 = local.eks_cluster_name
   security_groups             = [
     aws_security_group.eks-node-sg.id]
