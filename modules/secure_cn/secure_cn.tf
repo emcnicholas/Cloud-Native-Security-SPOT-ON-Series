@@ -1,4 +1,5 @@
 // SecureCN Cluster
+
 resource "securecn_k8s_cluster" "cluster" {
   kubernetes_cluster_context = var.kubernetes_cluster_context_name
   name = var.environment_name
@@ -10,7 +11,7 @@ resource "securecn_k8s_cluster" "cluster" {
   multi_cluster_communication_support = false
   fail_close = false
   persistent_storage = false
-  trace_analyzer = true
+  trace_analyzer = false
   api_intelligence_dast = false
 }
 
