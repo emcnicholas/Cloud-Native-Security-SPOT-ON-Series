@@ -5,7 +5,8 @@ metadata:
   name: yelb
   labels:
     app: yelb
-    istio-injection: enabled
+    # istio-injection: enabled
+    # SecureApplication-protected: full
 ---
 apiVersion: v1
 kind: Service
