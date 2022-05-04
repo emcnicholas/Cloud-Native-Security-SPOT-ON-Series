@@ -23,16 +23,16 @@ module "Secure_Cloud_Analytics" {
 }
 
 // Deploy Secure Workload
-module "Secure_Workload" {
-  depends_on = [module.Infrastructure]
-  source = "./modules/secure_workload"
-  secure_workload_api_key    = var.secure_workload_api_key
-  secure_workload_api_sec    = var.secure_workload_api_sec
-  secure_workload_api_url    = var.secure_workload_api_url
-  secure_workload_root_scope = var.secure_workload_root_scope
-  eks_cluster_name           = module.Infrastructure.eks_cluster_name
-  env_id                     = var.env_id
-}
+#module "Secure_Workload" {
+#  depends_on = [module.Infrastructure]
+#  source = "./modules/secure_workload"
+#  secure_workload_api_key    = var.secure_workload_api_key
+#  secure_workload_api_sec    = var.secure_workload_api_sec
+#  secure_workload_api_url    = var.secure_workload_api_url
+#  secure_workload_root_scope = var.secure_workload_root_scope
+#  eks_cluster_name           = module.Infrastructure.eks_cluster_name
+#  env_id                     = var.env_id
+#}
 // Update AWS EKS Kubeconfig
 resource "null_resource" "update_kubeconfig" {
   depends_on = [module.Infrastructure]

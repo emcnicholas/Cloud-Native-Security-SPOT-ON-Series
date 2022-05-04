@@ -5,7 +5,7 @@ pipeline{
     // Environment Variables //
     environment{
         ENVIRONMENT_NAME       = 'SPOT_ON'
-        PROD_ENV_ID            = 'Prod'
+        PROD_ENV_ID            = 'Secure_CN'
         AWS_ACCESS_KEY_ID      = credentials('aws-access-key')
         AWS_SECRET_ACCESS_KEY  = credentials('aws-secret-key')
         PROD_AWS_REGION        = 'us-east-2'
