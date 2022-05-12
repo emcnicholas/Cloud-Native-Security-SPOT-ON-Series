@@ -21,6 +21,11 @@ pipeline{
         SW_ROOT_SCOPE          = credentials('sw-root-scope')
         SECURE_CN_KEY          = credentials('secure_cn_access_key')
         SECURE_CN_SEC          = credentials('secure_cn_secret_key')
+        APPD_ACCT_NAME         = credentials('appd_account_name')
+        APPD_KEY               = credentials('appd_controller_key')
+        APPD_GLOB_ACCT         = credentials('appd_global_account')
+        APPD_PASSWORD          = credentials('appd_password')
+        APPD_USERNAME          = credentials('appd_username')
     }
     stages{
         // This stage will run Terraform Apply when "Deploy Env" is added to the commit message //
@@ -52,7 +57,12 @@ pipeline{
                 -var="secure_workload_api_url=$SW_URL" \
                 -var="secure_workload_root_scope=$SW_ROOT_SCOPE" \
                 -var="secure_cn_access_key=$SECURE_CN_KEY" \
-                -var="secure_cn_secret_key=$SECURE_CN_SEC"'
+                -var="secure_cn_secret_key=$SECURE_CN_SEC" \
+                -var="appd_account_name=$APPD_ACCT_NAME" \
+                -var="appd_controller_key=$APPD_KEY" \
+                -var="appd_global_account=$APPD_GLOB_ACCT" \
+                -var="appd_password=$APPD_PASSWORD" \
+                -var="appd_username=$APPD_USERNAME"'
             }
         }
         // This stage will destroy the environment when "Destroy Environment" is added to the commit message
@@ -83,7 +93,12 @@ pipeline{
                 -var="secure_workload_api_url=$SW_URL" \
                 -var="secure_workload_root_scope=$SW_ROOT_SCOPE" \
                 -var="secure_cn_access_key=$SECURE_CN_KEY" \
-                -var="secure_cn_secret_key=$SECURE_CN_SEC"'
+                -var="secure_cn_secret_key=$SECURE_CN_SEC" \
+                -var="appd_account_name=$APPD_ACCT_NAME" \
+                -var="appd_controller_key=$APPD_KEY" \
+                -var="appd_global_account=$APPD_GLOB_ACCT" \
+                -var="appd_password=$APPD_PASSWORD" \
+                -var="appd_username=$APPD_USERNAME"'
             }
         }
     }
