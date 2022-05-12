@@ -53,6 +53,8 @@ variable "secure_workload_api_url" {
 variable "secure_workload_root_scope" {
   description = "The ID of the Secure Workload Root Scope"
 }
+
+// Secure App Cloud API and Secret Key
 variable "secure_cn_access_key" {
   description = "Secure CN Access Key"
 }
@@ -63,3 +65,20 @@ variable "secure_cn_secret_key" {
 #  description = "Secure CN Serer URL"
 #  default =
 #}
+
+// Secure Application (AppD) variables
+variable "appd_account_name" {
+  description = "The name of the AppDynamics account. This value can be found in Settings > License > Account > Name."
+}
+variable "appd_controller_key" {
+  description = "The key used for authorizing with the AppDynamics controller. This value can be found in Settings > License > Account > Access Key."
+}
+variable "appd_global_account" {
+  description = "The name of the global AppDynamics account. This value can be found in Settings > License > Account > Global Account Name."
+}
+variable "appd_password" {
+  description = "Password used for logging into the AppDynamics account. This will either be your password, or the password of the account created for this integration."
+}
+variable "appd_username" {
+  description = "Username used for logging into the AppDynamics account. This will either be your username, or the username of the account created for this integration."
+}

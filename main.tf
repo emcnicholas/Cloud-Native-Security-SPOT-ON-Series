@@ -17,8 +17,8 @@ module "Infrastructure" {
 
 // Deploy Secure Cloud Analytics
 module "Secure_Cloud_Analytics" {
-  depends_on = [module.Infrastructure]
-  source = "./modules/secure_cloud_analytics"
+  depends_on      = [module.Infrastructure]
+  source          = "./modules/secure_cloud_analytics"
   sca_service_key = var.sca_service_key
 }
 
@@ -46,12 +46,23 @@ resource "null_resource" "update_kubeconfig" {
 
 // Deploy Secure Application Cloud (CN)
 module "Secure_CN" {
-  depends_on = [null_resource.update_kubeconfig]
-  source = "./modules/secure_cn"
-  environment_name = module.Infrastructure.eks_cluster_name
+  depends_on                      = [null_resource.update_kubeconfig]
+  source                          = "./modules/secure_cn"
+  environment_name                = module.Infrastructure.eks_cluster_name
   kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
 }
 
+// Deploy Secure Application (AppD) -  I know so confusing :(
+module "appdynamics_clusteragent" {
+  source  = "3191110276/appdynamics/kubernetes//modules/clusteragent"
+  version = "0.2.12"
+  appd_account_name = var.appd_account_name
+  appd_controller_key = var.appd_controller_key
+  appd_global_account = var.appd_global_account
+  appd_password = var.appd_password
+  appd_username = var.appd_username
+  cluster_name = module.Infrastructure.eks_cluster_name
+}
 // Providers //
 
 terraform {
