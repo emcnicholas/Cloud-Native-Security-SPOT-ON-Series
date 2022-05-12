@@ -33,6 +33,7 @@ module "Secure_Cloud_Analytics" {
 #  eks_cluster_name           = module.Infrastructure.eks_cluster_name
 #  env_id                     = var.env_id
 #}
+
 // Update AWS EKS Kubeconfig
 resource "null_resource" "update_kubeconfig" {
   depends_on = [module.Infrastructure]
