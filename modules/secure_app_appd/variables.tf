@@ -31,3 +31,9 @@ variable "controller_accessKey" {
   type        = string
   sensitive   = true
 }
+variable "cluster_name" {
+  description = "EKS Cluster Name"
+}
+variable "namespaces" {
+  description = "Namespaces to install java agent (ex: sock-shop, or for multiple ns, sock-shop|yelb|book)"
+}

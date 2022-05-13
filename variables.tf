@@ -96,3 +96,6 @@ variable "controller_accessKey" {
   type        = string
   sensitive   = true
 }
+variable "appd_namespaces" {
+  description = "Namespaces to install java agent (ex: sock-shop, or for multiple ns, sock-shop|yelb|book)"
+}
