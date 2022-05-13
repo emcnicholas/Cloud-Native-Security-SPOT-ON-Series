@@ -21,11 +21,12 @@ pipeline{
         SW_ROOT_SCOPE          = credentials('sw-root-scope')
         SECURE_CN_KEY          = credentials('secure_cn_access_key')
         SECURE_CN_SEC          = credentials('secure_cn_secret_key')
-        APPD_ACCT_NAME         = credentials('appd_account_name')
+        APPD_ACCT_NAME         = 'elephant202205050827467'
         APPD_KEY               = credentials('appd_controller_key')
-        APPD_URL               = 'https://devnet.saas.appdynamics.com'
+        APPD_URL               = 'https://elephant202205050827467.saas.appdynamics.com'
         APPD_PASSWORD          = credentials('appd_password')
         APPD_USERNAME          = credentials('appd_username')
+        APPD_NS                = 'sock-shop'
     }
     stages{
         // This stage will run Terraform Apply when "Deploy Env" is added to the commit message //
@@ -62,7 +63,8 @@ pipeline{
                 -var="controller_accessKey=$APPD_KEY" \
                 -var="controller_url=$APPD_URL" \
                 -var="controller_password=$APPD_PASSWORD" \
-                -var="controller_username=$APPD_USERNAME"'
+                -var="controller_username=$APPD_USERNAME" \
+                -var="appd_namespaces=$APPD_NS"'
             }
         }
         // This stage will destroy the environment when "Destroy Environment" is added to the commit message
@@ -98,7 +100,8 @@ pipeline{
                 -var="controller_accessKey=$APPD_KEY" \
                 -var="controller_url=$APPD_URL" \
                 -var="controller_password=$APPD_PASSWORD" \
-                -var="controller_username=$APPD_USERNAME"'
+                -var="controller_username=$APPD_USERNAME" \
+                -var="appd_namespaces=$APPD_NS"'
             }
         }
     }

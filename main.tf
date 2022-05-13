@@ -56,11 +56,13 @@ module "Secure_CN" {
 module "Secure_App" {
   depends_on = [module.Infrastructure]
   source = "./modules/secure_app_appd"
+  cluster_name         = module.Infrastructure.eks_cluster_name
   controller_url       = var.controller_url
   controller_account   = var.controller_account
   controller_username  = var.controller_username
   controller_password  = var.controller_password
   controller_accessKey = var.controller_accessKey
+  namespaces           = var.appd_namespaces
 }
 
 // Providers //
