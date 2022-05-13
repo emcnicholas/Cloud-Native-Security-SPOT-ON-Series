@@ -9,7 +9,7 @@ installClusterAgent: true
 # AppDynamics controller info
 controllerInfo:
   url: ${appd_url}
-  account: "${appd_acct}"
+  account: https://devnet.saas.appdynamics.com:443
   username: "${appd_user}"
   password: "${appd_pass}"
   accessKey: "${appd_key}"
