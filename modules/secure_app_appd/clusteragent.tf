@@ -53,7 +53,7 @@ resource "kubernetes_secret" "cluster-agent-secret" {
   depends_on = [kubernetes_namespace.appdynamics]
   metadata {
     name = "cluster-agent-secret"
-    namespace = kubernetes_namespace.appdynamics
+    namespace = "appdynamics"
   }
   data = {
     controller-key = var.controller_accessKey
