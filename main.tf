@@ -63,6 +63,7 @@ module "appdynamics_clusteragent" {
   appd_username = var.appd_username
   cluster_name = module.Infrastructure.eks_cluster_name
 }
+
 // Providers //
 
 terraform {
