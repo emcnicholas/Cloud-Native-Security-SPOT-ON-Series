@@ -48,6 +48,7 @@ resource "null_resource" "cluster-agent-operator" {
       command = "kubectl create -f cluster-agent-operator.yaml"
   }
 }
+
 // Create Secret using Account Key
 resource "kubernetes_secret" "cluster-agent-secret" {
   depends_on = [kubernetes_namespace.appdynamics]
