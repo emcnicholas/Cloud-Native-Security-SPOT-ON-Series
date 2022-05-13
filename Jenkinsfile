@@ -23,7 +23,7 @@ pipeline{
         SECURE_CN_SEC          = credentials('secure_cn_secret_key')
         APPD_ACCT_NAME         = credentials('appd_account_name')
         APPD_KEY               = credentials('appd_controller_key')
-        APPD_URL               = 'https://devnet.saas.appdynamics.com:443'
+        APPD_URL               = 'https://devnet.saas.appdynamics.com'
         APPD_PASSWORD          = credentials('appd_password')
         APPD_USERNAME          = credentials('appd_username')
     }

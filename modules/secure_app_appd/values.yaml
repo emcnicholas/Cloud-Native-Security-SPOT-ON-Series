@@ -9,10 +9,10 @@ installClusterAgent: true
 # AppDynamics controller info
 controllerInfo:
   url: ${appd_url}
-  account: ${appd_acct}
-  username: ${appd_user}
-  password: ${appd_pass}
-  accessKey: ${appd_key}
+  account: "${appd_acct}"
+  username: "${appd_user}"
+  password: "${appd_pass}"
+  accessKey: "${appd_key}"
 
 ## Cluster agent config
 #clusterAgent:
