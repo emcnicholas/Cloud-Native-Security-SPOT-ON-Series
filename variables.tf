@@ -66,19 +66,33 @@ variable "secure_cn_secret_key" {
 #  default =
 #}
 
-// Secure Application (AppD) variables
-variable "appd_account_name" {
-  description = "The name of the AppDynamics account. This value can be found in Settings > License > Account > Name."
+// AppDynamics Secure App Variables
+variable "controller_url" {
+  description = "AppDynamics controller URL"
+  type        = string
+  sensitive   = true
 }
-variable "appd_controller_key" {
-  description = "The key used for authorizing with the AppDynamics controller. This value can be found in Settings > License > Account > Access Key."
+
+variable "controller_account" {
+  description = "AppDynamics controller account name"
+  type        = string
+  sensitive   = true
 }
-variable "appd_global_account" {
-  description = "The name of the global AppDynamics account. This value can be found in Settings > License > Account > Global Account Name."
+
+variable "controller_username" {
+  description = "AppDynamics controller username"
+  type        = string
+  sensitive   = true
 }
-variable "appd_password" {
-  description = "Password used for logging into the AppDynamics account. This will either be your password, or the password of the account created for this integration."
+
+variable "controller_password" {
+  description = "AppDynamics controller password"
+  type        = string
+  sensitive   = true
 }
-variable "appd_username" {
-  description = "Username used for logging into the AppDynamics account. This will either be your username, or the username of the account created for this integration."
+
+variable "controller_accessKey" {
+  description = "AppDynamics controller access key"
+  type        = string
+  sensitive   = true
 }

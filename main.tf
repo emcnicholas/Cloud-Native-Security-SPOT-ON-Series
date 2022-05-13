@@ -53,15 +53,14 @@ module "Secure_CN" {
 }
 
 // Deploy Secure Application (AppD) -  I know so confusing :(
-module "appdynamics_clusteragent" {
-  source  = "3191110276/appdynamics/kubernetes//modules/clusteragent"
-  version = "0.2.12"
-  appd_account_name = var.appd_account_name
-  appd_controller_key = var.appd_controller_key
-  appd_global_account = var.appd_global_account
-  appd_password = var.appd_password
-  appd_username = var.appd_username
-  cluster_name = module.Infrastructure.eks_cluster_name
+module "Secure_App" {
+  depends_on = [module.Infrastructure]
+  source = "./modules/secure_app_appd"
+  controller_url       = var.controller_url
+  controller_account   = var.controller_account
+  controller_username  = var.controller_username
+  controller_password  = var.controller_password
+  controller_accessKey = var.controller_accessKey
 }
 
 // Providers //
@@ -78,7 +77,11 @@ terraform {
     }
     kubectl = {
       source = "gavinbunney/kubectl"
-      version = "1.11.3"
+      version = "1.14.0"
+    }
+    helm = {
+      source = "hashicorp/helm"
+      version = ">= 2.2.0"
     }
     tetration = {
       source = "CiscoDevNet/tetration"
@@ -108,6 +111,14 @@ provider "kubectl" {
   cluster_ca_certificate = base64decode(module.Infrastructure.eks_cluster_ca)
   token                  = module.Infrastructure.eks_cluster_auth_token
   load_config_file       = false
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.Infrastructure.eks_cluster_api_endpoint
+    cluster_ca_certificate = base64decode(module.Infrastructure.eks_cluster_ca)
+    token                  = module.Infrastructure.eks_cluster_auth_token
+  }
 }
 
 provider "tetration" {
