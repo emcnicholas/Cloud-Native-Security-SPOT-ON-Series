@@ -1,21 +1,25 @@
+import time
 import base64
-
-from locust import HttpLocust, TaskSet, task
+from locust import HttpUser, task, between
 from random import randint, choice
 
 
-class WebTasks(TaskSet):
+class User(HttpUser):
 
     @task
-    def load(self):
-        #base64string = base64.encodestring('%s:%s' % ('user', 'password')).replace('\n', '')
+    def catalogue(self):
+        username = "beth"
+        password = "flowbee"
+        userpass = f"{username}:{password}"
+        encoded_userpass = base64.b64encode(userpass.encode()).decode()
+        headers = {"Authorization" : "Basic %s" % encoded_userpass}
 
         catalogue = self.client.get("/catalogue").json()
         category_item = choice(catalogue)
         item_id = category_item["id"]
 
         self.client.get("/")
-        #self.client.get("/login", headers={"Authorization":"Basic %s" % base64string})
+        self.client.get("/login", headers=headers)
         self.client.get("/category.html")
         self.client.get("/detail.html?id={}".format(item_id))
         self.client.delete("/cart")
@@ -24,7 +28,3 @@ class WebTasks(TaskSet):
         self.client.post("/orders")
 
 
-class Web(HttpUser):
-    task_set = WebTasks
-    min_wait = 0
-    max_wait = 0
