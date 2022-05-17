@@ -66,7 +66,6 @@ module "Secure_App" {
 }
 
 // Providers //
-
 terraform {
   required_providers {
     aws = {
