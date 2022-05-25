@@ -54,15 +54,12 @@ module "Secure_CN" {
 
 // Deploy Secure Application (AppD) -  I know so confusing :(
 module "Secure_App" {
-  depends_on = [module.Infrastructure]
-  source = "./modules/secure_app_appd"
-  cluster_name         = module.Infrastructure.eks_cluster_name
-  controller_url       = var.controller_url
-  controller_account   = var.controller_account
-  controller_username  = var.controller_username
-  controller_password  = var.controller_password
-  controller_accessKey = var.controller_accessKey
-  namespaces           = var.appd_namespaces
+  source = "./modules/secure_app"
+  appd_url          = var.appd_url
+  appd_account_name = var.appd_account_name
+  appd_username     = var.appd_username
+  appd_password     = var.appd_password
+  appd_accessKey    = var.appd_accessKey
 }
 
 // Providers //
@@ -74,11 +71,11 @@ terraform {
     }
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = ">=2.4.1"
     }
     kubectl = {
       source = "gavinbunney/kubectl"
-      version = "1.11.3"
+      version = ">=1.14.0"
     }
     helm = {
       source = "hashicorp/helm"
