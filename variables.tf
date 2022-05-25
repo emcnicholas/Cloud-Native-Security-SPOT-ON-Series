@@ -67,35 +67,28 @@ variable "secure_cn_secret_key" {
 #}
 
 // AppDynamics Secure App Variables
-variable "controller_url" {
-  description = "AppDynamics controller URL"
+variable "appd_url" {
+  description = "URL of the Appd SaaS instance ex: https://mycompany.saas.appdynamics.com"
   type        = string
   sensitive   = true
 }
-
-variable "controller_account" {
-  description = "AppDynamics controller account name"
+variable "appd_account_name" {
+  description = "Name of the AppD Account (can be found at Settings > License > Account Details > Name"
   type        = string
   sensitive   = true
 }
-
-variable "controller_username" {
-  description = "AppDynamics controller username"
+variable "appd_username" {
+  description = "DevNet AppDynamics controller username"
   type        = string
   sensitive   = true
 }
-
-variable "controller_password" {
-  description = "AppDynamics controller password"
+variable "appd_password" {
+  description = "DevNet AppDynamics controller password"
   type        = string
   sensitive   = true
 }
-
-variable "controller_accessKey" {
-  description = "AppDynamics controller access key"
+variable "appd_accessKey" {
+  description = "AppD Access Key (can be found at Settings > License > Account Details > Access Key"
   type        = string
   sensitive   = true
-}
-variable "appd_namespaces" {
-  description = "Namespaces to install java agent (ex: sock-shop, or for multiple ns, sock-shop|yelb|book)"
 }
