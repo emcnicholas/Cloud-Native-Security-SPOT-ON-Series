@@ -8,8 +8,8 @@ class User(HttpUser):
 
     @task
     def catalogue(self):
-        username = "beth"
-        password = "flowbee"
+        username = "test"
+        password = "test"
         userpass = f"{username}:{password}"
         encoded_userpass = base64.b64encode(userpass.encode()).decode()
         headers = {"Authorization" : "Basic %s" % encoded_userpass}

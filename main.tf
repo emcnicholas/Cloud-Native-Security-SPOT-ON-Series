@@ -45,22 +45,22 @@ resource "null_resource" "update_kubeconfig" {
 
 
 // Deploy Secure Application Cloud (CN)
-module "Secure_CN" {
-  depends_on                      = [null_resource.update_kubeconfig]
-  source                          = "./modules/secure_cn"
-  environment_name                = module.Infrastructure.eks_cluster_name
-  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
-}
-
-// Deploy Secure Application (AppD) -  I know so confusing :(
-module "Secure_App" {
-  source = "./modules/secure_app"
-  appd_url          = var.appd_url
-  appd_account_name = var.appd_account_name
-  appd_username     = var.appd_username
-  appd_password     = var.appd_password
-  appd_accessKey    = var.appd_accessKey
-}
+#module "Secure_CN" {
+#  depends_on                      = [null_resource.update_kubeconfig]
+#  source                          = "./modules/secure_cn"
+#  environment_name                = module.Infrastructure.eks_cluster_name
+#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
+#}
+#
+#// Deploy Secure Application (AppD) -  I know so confusing :(
+#module "Secure_App" {
+#  source = "./modules/secure_app"
+#  appd_url          = var.appd_url
+#  appd_account_name = var.appd_account_name
+#  appd_username     = var.appd_username
+#  appd_password     = var.appd_password
+#  appd_accessKey    = var.appd_accessKey
+#}
 
 // Providers //
 terraform {
