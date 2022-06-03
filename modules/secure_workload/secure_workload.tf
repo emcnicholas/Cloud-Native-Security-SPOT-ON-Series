@@ -1,8 +1,16 @@
 // Secure Workload Configuration Terraform Resources //
 
+// Deploy Secure Workload DaemonSet in Kubernetes Cluster
+resource "null_resource" "deploy_daemonset" {
+  provisioner "local-exec" {
+      working_dir = path.module
+      command = "bash cloud-native-security-workload-install-script-v1.sh"
+  }
+}
+
 // Cluster Root Scope
 resource "tetration_scope" "root_scope" {
-  depends_on = []
+  depends_on = [null_resource.deploy_daemonset]
   short_name          = var.eks_cluster_name
   short_query_type    = "eq"
   short_query_field   = "user_orchestrator_system/cluster_name"
