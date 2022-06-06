@@ -15,13 +15,6 @@ module "Infrastructure" {
   key_name       = var.key_name
 }
 
-// Deploy Secure Cloud Analytics
-module "Secure_Cloud_Analytics" {
-  depends_on      = [module.Infrastructure]
-  source          = "./modules/secure_cloud_analytics"
-  sca_service_key = var.sca_service_key
-}
-
 // Update AWS EKS Kubeconfig
 resource "null_resource" "update_kubeconfig" {
   depends_on = [module.Infrastructure]
@@ -29,6 +22,12 @@ resource "null_resource" "update_kubeconfig" {
       working_dir = path.module
       command = "aws eks --region ${var.region} update-kubeconfig --name ${module.Infrastructure.eks_cluster_name}"
   }
+}
+// Deploy Secure Cloud Analytics
+module "Secure_Cloud_Analytics" {
+  depends_on      = [module.Infrastructure]
+  source          = "./modules/secure_cloud_analytics"
+  sca_service_key = var.sca_service_key
 }
 
 // Deploy Secure Workload
