@@ -1,4 +1,4 @@
-// SecureCN Cluster
+// Panoptica
 
 resource "securecn_k8s_cluster" "cluster" {
   kubernetes_cluster_context = var.kubernetes_cluster_context_name
