@@ -8,7 +8,7 @@ resource "null_resource" "deploy_daemonset" {
   }
 }
 
-// Cluster Root Scope
+// Deploy Cluster Scope
 resource "tetration_scope" "root_scope" {
   depends_on = [null_resource.deploy_daemonset]
   short_name          = var.eks_cluster_name
