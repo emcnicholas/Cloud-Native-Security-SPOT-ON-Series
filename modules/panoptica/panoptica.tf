@@ -17,6 +17,7 @@ resource "securecn_k8s_cluster" "cluster" {
 
 // SecureCN Environments
 resource "securecn_environment" "yelb" {
+  depends_on = [securecn_k8s_cluster.cluster]
 
   name = "${var.environment_name}_Yelb_App"
   description = "Yelb App Environment"
@@ -34,6 +35,7 @@ resource "securecn_environment" "yelb" {
 
 // Yelb Connection Rules
 resource "securecn_connection_rule" "External_to_Yelb_UI" {
+  depends_on = [securecn_environment.yelb]
   rule_name = "External to Yelb Web UI "
   source_by_external = true
   destination_by_pod_name {
@@ -42,6 +44,7 @@ resource "securecn_connection_rule" "External_to_Yelb_UI" {
 }
 
 resource "securecn_connection_rule" "Yelb_UI_to_App" {
+  depends_on = [securecn_environment.yelb]
   rule_name = "Yelb UI to App"
   source_by_pod_name {
     names = ["yelb-ui"]
@@ -52,6 +55,7 @@ resource "securecn_connection_rule" "Yelb_UI_to_App" {
 }
 
 resource "securecn_connection_rule" "Yelb_App_to_DB" {
+  depends_on = [securecn_environment.yelb]
   rule_name = "Yelb App to DB"
   source_by_pod_name {
     names = ["yelb-appserver"]
@@ -62,6 +66,7 @@ resource "securecn_connection_rule" "Yelb_App_to_DB" {
 }
 
 resource "securecn_connection_rule" "Yelb_App_to_Redis" {
+  depends_on = [securecn_environment.yelb]
   rule_name = "Yelb App to Redis"
   source_by_pod_name {
     names = ["yelb-appserver"]
@@ -72,6 +77,7 @@ resource "securecn_connection_rule" "Yelb_App_to_Redis" {
 }
 
 resource "securecn_connection_rule" "Any_to_External" {
+  depends_on = [securecn_environment.yelb]
   rule_name = "Yelb Pods to External"
   source_by_pod_any {
 
