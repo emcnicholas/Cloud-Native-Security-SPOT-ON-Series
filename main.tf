@@ -44,12 +44,12 @@ module "Secure_Cloud_Analytics" {
 
 
 // Deploy Secure Application Cloud (CN)
-module "Panoptica" {
-  depends_on                      = [null_resource.update_kubeconfig]
-  source                          = "./modules/panoptica"
-  environment_name                = module.Infrastructure.eks_cluster_name
-  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
-}
+#module "Panoptica" {
+#  depends_on                      = [null_resource.update_kubeconfig]
+#  source                          = "./modules/panoptica"
+#  environment_name                = module.Infrastructure.eks_cluster_name
+#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
+#}
 #
 #// Deploy Secure Application (AppD) -  I know so confusing :(
 #module "Secure_App" {
@@ -128,5 +128,4 @@ provider "tetration" {
 provider "securecn" {
   access_key = var.secure_cn_access_key
   secret_key = var.secure_cn_secret_key
-  //server_url = var.secure_cn_server_url
 }

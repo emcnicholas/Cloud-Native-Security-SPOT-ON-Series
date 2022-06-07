@@ -54,7 +54,7 @@ variable "secure_workload_root_scope" {
   description = "The ID of the Secure Workload Root Scope"
 }
 
-// Secure App Cloud API and Secret Key
+// Panoptica Secure App Cloud API and Secret Key
 variable "secure_cn_access_key" {
   description = "Secure CN Access Key"
 }
