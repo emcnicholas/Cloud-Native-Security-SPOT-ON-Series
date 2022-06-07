@@ -37,6 +37,11 @@ pipeline{
             }
            steps{
                 echo "Building Environment"
+                sh 'terraform state rm module.Panoptica.securecn_connection_rule.Any_to_External'
+                sh 'terraform state rm module.Panoptica.securecn_connection_rule.Yelb_App_to_Redis'
+                sh 'terraform state rm module.Panoptica.securecn_connection_rule.Yelb_UI_to_App'
+                sh 'terraform state rm module.Panoptica.securecn_connection_rule.Yelb_App_to_DB'
+                sh 'terraform state rm module.Panoptica.securecn_connection_rule.External_to_Yelb_UI'
                 sh 'terraform get -update'
                 sh 'terraform init -upgrade'
                 sh 'terraform apply -auto-approve \
