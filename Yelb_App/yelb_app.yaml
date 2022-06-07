@@ -6,7 +6,6 @@ metadata:
   labels:
     app: yelb
     istio-injection: enabled
-    # SecureApplication-protected: full
 ---
 apiVersion: v1
 kind: Service
