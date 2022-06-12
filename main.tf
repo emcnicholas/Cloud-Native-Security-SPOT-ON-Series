@@ -32,16 +32,16 @@ module "Secure_Cloud_Analytics" {
 }
 
 // Deploy Secure Workload
-#module "Secure_Workload" {
-#  depends_on = [null_resource.update_kubeconfig]
-#  source = "./modules/secure_workload"
-#  secure_workload_api_key    = var.secure_workload_api_key
-#  secure_workload_api_sec    = var.secure_workload_api_sec
-#  secure_workload_api_url    = var.secure_workload_api_url
-#  secure_workload_root_scope = var.secure_workload_root_scope
-#  eks_cluster_name           = module.Infrastructure.eks_cluster_name
-#  env_id                     = var.env_id
-#}
+module "Secure_Workload" {
+  depends_on = [null_resource.update_kubeconfig]
+  source = "./modules/secure_workload"
+  secure_workload_api_key    = var.secure_workload_api_key
+  secure_workload_api_sec    = var.secure_workload_api_sec
+  secure_workload_api_url    = var.secure_workload_api_url
+  secure_workload_root_scope = var.secure_workload_root_scope
+  eks_cluster_name           = module.Infrastructure.eks_cluster_name
+  env_id                     = var.env_id
+}
 
 
 // Deploy Secure Application Cloud (CN)
@@ -81,10 +81,10 @@ terraform {
       source = "hashicorp/helm"
       version = ">= 2.2.0"
     }
-#    tetration = {
-#      source = "CiscoDevNet/tetration"
-#      version = "0.1.0"
-#    }
+    tetration = {
+      source = "CiscoDevNet/tetration"
+      version = "0.1.0"
+    }
 #    securecn = {
 #      source = "Portshift/securecn"
 #      version = ">= 1.1.10"
@@ -119,13 +119,13 @@ provider "helm" {
   }
 }
 
-#provider "tetration" {
-#  api_key = var.secure_workload_api_key
-#  api_secret = var.secure_workload_api_sec
-#  api_url = var.secure_workload_api_url
-#  disable_tls_verification = true
-#}
-#
+provider "tetration" {
+  api_key = var.secure_workload_api_key
+  api_secret = var.secure_workload_api_sec
+  api_url = var.secure_workload_api_url
+  disable_tls_verification = true
+}
+
 #provider "securecn" {
 #  access_key = var.secure_cn_access_key
 #  secret_key = var.secure_cn_secret_key
