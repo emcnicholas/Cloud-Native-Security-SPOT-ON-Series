@@ -38,9 +38,9 @@ variable "remote_hosts" {
 }
 
 // Secure Cloud Analytics Variables
-#variable "sca_service_key" {
-#  description = "Secure Cloud Analytics Service Key"
-#}
+variable "sca_service_key" {
+  description = "Secure Cloud Analytics Service Key"
+}
 
 // Secure Workload Variables
 #variable "secure_workload_api_key" {
