@@ -44,13 +44,13 @@ module "Secure_Workload" {
 }
 
 
-// Deploy Secure Application Cloud (CN)
-#module "Panoptica" {
-#  depends_on                      = [null_resource.update_kubeconfig]
-#  source                          = "./modules/panoptica"
-#  environment_name                = module.Infrastructure.eks_cluster_name
-#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
-#}
+// Deploy Panoptica - Secure Application Cloud (CN)
+module "Panoptica" {
+  depends_on                      = [null_resource.update_kubeconfig]
+  source                          = "./modules/panoptica"
+  environment_name                = module.Infrastructure.eks_cluster_name
+  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
+}
 
 #// Deploy Secure Application (AppD) -  I know so confusing :(
 #module "Secure_App" {
@@ -85,10 +85,10 @@ terraform {
       source = "CiscoDevNet/tetration"
       version = "0.1.0"
     }
-#    securecn = {
-#      source = "Portshift/securecn"
-#      version = ">= 1.1.10"
-#    }
+    securecn = {
+      source = "Portshift/securecn"
+      version = ">= 1.1.10"
+    }
   }
 }
 provider "aws" {
@@ -126,7 +126,7 @@ provider "tetration" {
   disable_tls_verification = true
 }
 
-#provider "securecn" {
-#  access_key = var.secure_cn_access_key
-#  secret_key = var.secure_cn_secret_key
-#}
+provider "securecn" {
+  access_key = var.secure_cn_access_key
+  secret_key = var.secure_cn_secret_key
+}
