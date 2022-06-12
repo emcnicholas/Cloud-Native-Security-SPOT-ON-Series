@@ -57,12 +57,12 @@ variable "secure_workload_root_scope" {
 }
 
 // Panoptica Variables
-#variable "secure_cn_access_key" {
-#  description = "Secure CN Access Key"
-#}
-#variable "secure_cn_secret_key" {
-#  description = "Secure CN Secret Key"
-#}
+variable "secure_cn_access_key" {
+  description = "Secure CN Access Key"
+}
+variable "secure_cn_secret_key" {
+  description = "Secure CN Secret Key"
+}
 
 // AppDynamics Secure App Variables
 #variable "appd_url" {
