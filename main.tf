@@ -25,11 +25,11 @@ resource "null_resource" "update_kubeconfig" {
 }
 
 // Deploy Secure Cloud Analytics
-module "Secure_Cloud_Analytics" {
-  depends_on      = [module.Infrastructure]
-  source          = "./modules/secure_cloud_analytics"
-  sca_service_key = var.sca_service_key
-}
+#module "Secure_Cloud_Analytics" {
+#  depends_on      = [module.Infrastructure]
+#  source          = "./modules/secure_cloud_analytics"
+#  sca_service_key = var.sca_service_key
+#}
 
 // Deploy Secure Workload
 #module "Secure_Workload" {
@@ -45,12 +45,12 @@ module "Secure_Cloud_Analytics" {
 
 
 // Deploy Secure Application Cloud (CN)
-module "Panoptica" {
-  depends_on                      = [null_resource.update_kubeconfig]
-  source                          = "./modules/panoptica"
-  environment_name                = module.Infrastructure.eks_cluster_name
-  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
-}
+#module "Panoptica" {
+#  depends_on                      = [null_resource.update_kubeconfig]
+#  source                          = "./modules/panoptica"
+#  environment_name                = module.Infrastructure.eks_cluster_name
+#  kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
+#}
 
 #// Deploy Secure Application (AppD) -  I know so confusing :(
 #module "Secure_App" {
@@ -81,14 +81,14 @@ terraform {
       source = "hashicorp/helm"
       version = ">= 2.2.0"
     }
-    tetration = {
-      source = "CiscoDevNet/tetration"
-      version = "0.1.0"
-    }
-    securecn = {
-      source = "Portshift/securecn"
-      version = ">= 1.1.10"
-    }
+#    tetration = {
+#      source = "CiscoDevNet/tetration"
+#      version = "0.1.0"
+#    }
+#    securecn = {
+#      source = "Portshift/securecn"
+#      version = ">= 1.1.10"
+#    }
   }
 }
 provider "aws" {
@@ -119,14 +119,14 @@ provider "helm" {
   }
 }
 
-provider "tetration" {
-  api_key = var.secure_workload_api_key
-  api_secret = var.secure_workload_api_sec
-  api_url = var.secure_workload_api_url
-  disable_tls_verification = true
-}
-
-provider "securecn" {
-  access_key = var.secure_cn_access_key
-  secret_key = var.secure_cn_secret_key
-}
+#provider "tetration" {
+#  api_key = var.secure_workload_api_key
+#  api_secret = var.secure_workload_api_sec
+#  api_url = var.secure_workload_api_url
+#  disable_tls_verification = true
+#}
+#
+#provider "securecn" {
+#  access_key = var.secure_cn_access_key
+#  secret_key = var.secure_cn_secret_key
+#}
