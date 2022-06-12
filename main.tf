@@ -23,6 +23,7 @@ resource "null_resource" "update_kubeconfig" {
       command = "aws eks --region ${var.region} update-kubeconfig --name ${module.Infrastructure.eks_cluster_name}"
   }
 }
+
 // Deploy Secure Cloud Analytics
 module "Secure_Cloud_Analytics" {
   depends_on      = [module.Infrastructure]
