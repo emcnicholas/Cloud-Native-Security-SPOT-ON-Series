@@ -43,7 +43,6 @@ module "Secure_Workload" {
   env_id                     = var.env_id
 }
 
-
 // Deploy Panoptica - Secure Application Cloud (CN)
 module "Panoptica" {
   depends_on                      = [null_resource.update_kubeconfig]
