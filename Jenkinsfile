@@ -3,8 +3,8 @@ pipeline{
     agent any
     // Environment Variables //
     environment{
-        ENVIRONMENT_NAME       = 'DevSecOps'
-        PROD_ENV_ID            = '1'
+        ENVIRONMENT_NAME       = 'Relay'
+        PROD_ENV_ID            = 'Module'
         AWS_ACCESS_KEY_ID      = credentials('aws-access-key')
         AWS_SECRET_ACCESS_KEY  = credentials('aws-secret-key')
         PROD_AWS_REGION        = 'us-east-2'
