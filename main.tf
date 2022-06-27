@@ -24,24 +24,24 @@ resource "null_resource" "update_kubeconfig" {
   }
 }
 
-// Deploy Secure Cloud Analytics
-module "Secure_Cloud_Analytics" {
-  depends_on      = [module.Infrastructure]
-  source          = "./modules/secure_cloud_analytics"
-  sca_service_key = var.sca_service_key
-}
-
-// Deploy Secure Workload
-module "Secure_Workload" {
-  depends_on = [null_resource.update_kubeconfig]
-  source = "./modules/secure_workload"
-  secure_workload_api_key    = var.secure_workload_api_key
-  secure_workload_api_sec    = var.secure_workload_api_sec
-  secure_workload_api_url    = var.secure_workload_api_url
-  secure_workload_root_scope = var.secure_workload_root_scope
-  eks_cluster_name           = module.Infrastructure.eks_cluster_name
-  env_id                     = var.env_id
-}
+#// Deploy Secure Cloud Analytics
+#module "Secure_Cloud_Analytics" {
+#  depends_on      = [module.Infrastructure]
+#  source          = "./modules/secure_cloud_analytics"
+#  sca_service_key = var.sca_service_key
+#}
+#
+#// Deploy Secure Workload
+#module "Secure_Workload" {
+#  depends_on = [null_resource.update_kubeconfig]
+#  source = "./modules/secure_workload"
+#  secure_workload_api_key    = var.secure_workload_api_key
+#  secure_workload_api_sec    = var.secure_workload_api_sec
+#  secure_workload_api_url    = var.secure_workload_api_url
+#  secure_workload_root_scope = var.secure_workload_root_scope
+#  eks_cluster_name           = module.Infrastructure.eks_cluster_name
+#  env_id                     = var.env_id
+#}
 
 // Deploy Panoptica - Secure Application Cloud (CN)
 module "Panoptica" {
@@ -51,15 +51,15 @@ module "Panoptica" {
   kubernetes_cluster_context_name = module.Infrastructure.eks_cluster_arn
 }
 
-// Deploy Secure Application (AppD) -  I know so confusing :(
-module "Secure_App" {
-  source = "./modules/secure_app"
-  appd_url          = var.appd_url
-  appd_account_name = var.appd_account_name
-  appd_username     = var.appd_username
-  appd_password     = var.appd_password
-  appd_accessKey    = var.appd_accessKey
-}
+#// Deploy Secure Application (AppD) -  I know so confusing :(
+#module "Secure_App" {
+#  source = "./modules/secure_app"
+#  appd_url          = var.appd_url
+#  appd_account_name = var.appd_account_name
+#  appd_username     = var.appd_username
+#  appd_password     = var.appd_password
+#  appd_accessKey    = var.appd_accessKey
+#}
 
 // Providers //
 terraform {
