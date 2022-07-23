@@ -1,6 +1,7 @@
 // Pipeline as Code
 pipeline{
     agent any
+
     // Environment Variables //
     environment{
         ENVIRONMENT_NAME       = 'Relay'
