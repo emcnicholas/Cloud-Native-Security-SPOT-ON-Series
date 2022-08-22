@@ -44,6 +44,7 @@ resource "null_resource" "update_kubeconfig" {
 #}
 
 // Deploy Panoptica - Secure Application Cloud (CN)
+
 module "Panoptica" {
   depends_on                      = [null_resource.update_kubeconfig]
   source                          = "./modules/panoptica"
