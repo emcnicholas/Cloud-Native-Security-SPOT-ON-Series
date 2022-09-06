@@ -43,7 +43,7 @@ resource "null_resource" "update_kubeconfig" {
 #  env_id                     = var.env_id
 #}
 
-// Deploy Panoptica - Secure Application Cloud (CN)
+// Deploy Panoptica - Secure Application Cloud
 module "Panoptica" {
   depends_on                      = [null_resource.update_kubeconfig]
   source                          = "./modules/panoptica"
